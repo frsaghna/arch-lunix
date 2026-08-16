@@ -1,0 +1,12 @@
+-- Matugen Generated Colors for Hyprland
+return {
+    primary = "rgba({{ colors.primary.default.hex_stripped }}ee)",
+    primary_container = "rgba({{ colors.primary_container.default.hex_stripped }}ee)",
+    secondary = "rgba({{ colors.secondary.default.hex_stripped }}ee)",
+    tertiary = "rgba({{ colors.tertiary.default.hex_stripped }}ee)",
+    surface = "rgba({{ colors.surface.default.hex_stripped }}ee)",
+    surface_container = "rgba({{ colors.surface_container.default.hex_stripped }}ee)",
+    outline = "rgba({{ colors.outline.default.hex_stripped }}aa)",
+    inactive_border = "rgba({{ colors.surface_container_highest.default.hex_stripped }}aa)",
+    active_border = { colors = {"rgba({{ colors.primary.default.hex_stripped }}ee)", "rgba({{ colors.tertiary.default.hex_stripped }}ee)"}, angle = 45 },
+}

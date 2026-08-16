@@ -1,0 +1,28 @@
+[config]
+reload_apps = true
+
+[templates.quickshell_theme]
+input_path = "/home/kimmi/.config/matugen/templates/dynamic-theme.qml"
+output_path = "/home/kimmi/.config/quickshell/modules/theme/DynamicTheme.qml"
+
+[templates.quickshell_json]
+input_path = "/home/kimmi/.config/matugen/templates/colors.json"
+output_path = "/home/kimmi/.cache/matugen/colors.json"
+
+[templates.hyprland_lua]
+input_path = "/home/kimmi/.config/matugen/templates/hyprland-colors.lua"
+output_path = "/home/kimmi/.config/hypr/colors.lua"
+post_command = "hyprctl reload 2>/dev/null || true"
+
+[templates.hyprland_conf]
+input_path = "/home/kimmi/.config/matugen/templates/hyprland-colors.conf"
+output_path = "/home/kimmi/.config/hypr/colors.conf"
+
+[templates.kitty]
+input_path = "/home/kimmi/.config/matugen/templates/kitty-colors.conf"
+output_path = "/home/kimmi/.config/kitty/colors.conf"
+post_command = "kitty @ set-colors -a /home/kimmi/.config/kitty/colors.conf 2>/dev/null || true"
+
+[templates.gtk3]
+input_path = "/home/kimmi/.config/matugen/templates/gtk3.css"
+output_path = "/home/kimmi/.config/gtk-3.0/gtk.css"

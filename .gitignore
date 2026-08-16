@@ -1,0 +1,4 @@
+*.log
+*.qslog
+.cache/
+.system_generated/
