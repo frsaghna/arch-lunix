@@ -1,115 +1,101 @@
 /* ============================================================================
-   Dynamic Frosted Glass Theme for GTK3 / Nemo (Synced 100% with Kitty)
+   Dynamic Material You Theme for GTK3 & Nemo
    ============================================================================ */
-@define-color accent_color #ffb599;
-@define-color accent_bg_color #ffb599;
-@define-color accent_fg_color #552008;
+@define-color accent_color #ffb3b0;
+@define-color accent_bg_color #ffb3b0;
+@define-color accent_fg_color #571d1e;
 
-@define-color theme_selected_bg_color #ffb599;
-@define-color theme_selected_fg_color #552008;
+@define-color theme_selected_bg_color #ffb3b0;
+@define-color theme_selected_fg_color #571d1e;
 
-@define-color theme_bg_color #1a110e;
-@define-color theme_base_color #1a110e;
-@define-color theme_fg_color #f1dfd9;
-@define-color theme_text_color #f1dfd9;
+@define-color theme_bg_color #1a1111;
+@define-color theme_base_color #1a1111;
+@define-color theme_fg_color #f0dedd;
+@define-color theme_text_color #f0dedd;
 
-/* Translucent Frosted Window & Views (Matching Kitty 0.65 Background Opacity) */
-window,
-window.background,
+/* Nemo Window Background */
 .nemo-window,
-.nemo-window-pane,
+.nemo-window .nemo-window-pane,
 .nemo-window .view,
-.nemo-window scrolledwindow,
 .nemo-window scrolledwindow.view,
-.nemo-window treeview,
-.nemo-window textview {
-    background-color: alpha(@theme_bg_color, 0.65) !important;
-    color: #f1dfd9 !important;
+.nemo-window treeview {
+    background-color: alpha(@theme_bg_color, 0.65);
+    color: @theme_fg_color;
 }
 
-/* Translucent Sidebar */
+/* Nemo Sidebar */
 .nemo-window .sidebar,
 .nemo-window .sidebar treeview,
-.nemo-places-sidebar,
-placesview {
-    background-color: alpha(#140c09, 0.55) !important;
-    color: #f1dfd9 !important;
-    border-right: 1px solid rgba(255, 255, 255, 0.08) !important;
+.nemo-places-sidebar {
+    background-color: alpha(#140c0c, 0.55);
+    color: @theme_fg_color;
+    border-right: 1px solid rgba(255, 255, 255, 0.08);
 }
 
-/* Headerbar, Toolbar, and Menubar */
+/* Headerbar & Toolbar */
 .nemo-window toolbar,
 .nemo-window .primary-toolbar,
 .nemo-window headerbar,
-.nemo-window menubar,
-menubar,
-toolbar {
-    background: alpha(@theme_bg_color, 0.65) !important;
-    background-color: alpha(@theme_bg_color, 0.65) !important;
-    background-image: none !important;
-    border: none !important;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
-    box-shadow: none !important;
-    color: #f1dfd9 !important;
+.nemo-window menubar {
+    background-color: alpha(@theme_bg_color, 0.65);
+    background-image: none;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow: none;
+    color: @theme_fg_color;
 }
 
 /* Breadcrumb Path Bar Buttons */
-.nemo-pathbar button,
 .nemo-window .nemo-pathbar button {
-    background: rgba(255, 255, 255, 0.08) !important;
-    background-color: rgba(255, 255, 255, 0.08) !important;
-    background-image: none !important;
-    color: #f1dfd9 !important;
-    border: 1px solid rgba(255, 255, 255, 0.12) !important;
+    background-color: rgba(255, 255, 255, 0.08);
+    background-image: none;
+    color: @theme_fg_color;
+    border: 1px solid rgba(255, 255, 255, 0.12);
     border-radius: 6px;
     padding: 3px 8px;
-    margin: 2px 2px;
-    box-shadow: none !important;
+    margin: 2px;
+    box-shadow: none;
 }
 
-.nemo-pathbar button:hover,
 .nemo-window .nemo-pathbar button:hover {
-    background: rgba(255, 255, 255, 0.16) !important;
-    border-color: #ffb599 !important;
+    background-color: rgba(255, 255, 255, 0.16);
+    border-color: @theme_selected_bg_color;
 }
 
-.nemo-pathbar button:checked,
-.nemo-pathbar button:active,
-.nemo-window .nemo-pathbar button:checked {
-    background: #ffb599 !important;
-    color: #552008 !important;
-    border-color: #ffb599 !important;
+.nemo-window .nemo-pathbar button:checked,
+.nemo-window .nemo-pathbar button:active {
+    background-color: @theme_selected_bg_color;
+    color: @theme_selected_fg_color;
+    border-color: @theme_selected_bg_color;
 }
 
 /* Navigation & Action Buttons */
 .nemo-window toolbar button,
 .nemo-window .primary-toolbar button {
-    background: rgba(255, 255, 255, 0.08) !important;
-    background-image: none !important;
-    color: #f1dfd9 !important;
-    border: 1px solid rgba(255, 255, 255, 0.12) !important;
+    background-color: rgba(255, 255, 255, 0.08);
+    background-image: none;
+    color: @theme_fg_color;
+    border: 1px solid rgba(255, 255, 255, 0.12);
     border-radius: 6px;
-    box-shadow: none !important;
+    box-shadow: none;
 }
 
 .nemo-window toolbar button:hover,
 .nemo-window .primary-toolbar button:hover {
-    background: rgba(255, 255, 255, 0.16) !important;
-    border-color: #ffb599 !important;
+    background-color: rgba(255, 255, 255, 0.16);
+    border-color: @theme_selected_bg_color;
 }
 
 /* Location text input entry */
 .nemo-window entry {
-    background: rgba(255, 255, 255, 0.08) !important;
-    background-color: rgba(255, 255, 255, 0.08) !important;
-    color: #f1dfd9 !important;
-    border: 1px solid rgba(255, 255, 255, 0.12) !important;
+    background-color: rgba(255, 255, 255, 0.08);
+    color: @theme_fg_color;
+    border: 1px solid rgba(255, 255, 255, 0.12);
     border-radius: 6px;
-    box-shadow: none !important;
+    box-shadow: none;
 }
 
 .nemo-window entry:focus {
-    border-color: #ffb599 !important;
+    border-color: @theme_selected_bg_color;
 }
 
 /* Selected Items in Grid & Tree Views */
@@ -118,15 +104,15 @@ toolbar {
 .nemo-window treeview.view:selected,
 .nemo-window .sidebar .view:selected,
 .nemo-places-sidebar .view:selected {
-    background-color: #ffb599 !important;
-    color: #552008 !important;
+    background-color: @theme_selected_bg_color;
+    color: @theme_selected_fg_color;
     border-radius: 6px;
 }
 
 /* Status Bar */
 .nemo-window statusbar,
 .nemo-window .statusbar {
-    background: alpha(#140c09, 0.65) !important;
-    border-top: 1px solid rgba(255, 255, 255, 0.08) !important;
-    color: #a08d86 !important;
+    background-color: alpha(#140c0c, 0.65);
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    color: #a08c8b;
 }
