@@ -1,14 +1,13 @@
 # Arch Linux + Hyprland Dotfiles
 
-A minimalist, keyboard-driven Wayland desktop configuration for Arch Linux and Hyprland, featuring dynamic Material You (Matugen) theming, Kitty terminal, Nemo file manager, Starship shell prompt, and systemd clipboard integration.
+A minimalist, keyboard-driven Wayland desktop configuration for Arch Linux and Hyprland, featuring Kitty terminal, Nemo file manager, Starship shell prompt, and systemd clipboard integration.
 
 ---
 
 ## Features
 
-- **Dynamic Material You Theming (Matugen)**
-  - Palette extraction from the active wallpaper.
-  - Consistent theming applied to Hyprland window borders, Kitty terminal, Nemo file manager, and GTK3 applications.
+- **Cohesive Dark Palette**
+  - Minimalist color scheme applied across Hyprland window borders, Kitty terminal, Nemo file manager, and GTK3 applications.
 
 - **Acrylic Blur & Glassmorphism**
   - Multi-pass Kawase blur engine (`passes = 3`, `size = 6`, `vibrancy = 0.2`).
@@ -19,7 +18,7 @@ A minimalist, keyboard-driven Wayland desktop configuration for Arch Linux and H
   - Custom GTK3 theme styling (`gtk-3.0/gtk.css`) tailored for Nemo:
     - Pathbar breadcrumbs and pill buttons.
     - Frosted translucent status bar and places sidebar.
-    - Selected item accent highlights matching wallpaper hues.
+    - Clean selection highlights and surface styling.
   - Hyprland opacity rules and desktop icon suppression.
 
 - **Universal Wayland Clipboard Management**
@@ -29,7 +28,7 @@ A minimalist, keyboard-driven Wayland desktop configuration for Arch Linux and H
   - Global cut, copy, paste, and select-all wrappers for terminals and GUI apps.
 
 - **Terminal & Shell**
-  - Kitty terminal configured with cursor trail animations, powerline tab bar, and dynamic color injection.
+  - Kitty terminal configured with cursor trail animations, powerline tab bar, and custom padding.
   - Starship cross-shell prompt with minimalist segment formatting.
 
 ---
@@ -77,8 +76,6 @@ A minimalist, keyboard-driven Wayland desktop configuration for Arch Linux and H
 
 ## Dependencies
 
-### Core Packages (Arch Official Repositories)
-
 ```bash
 sudo pacman -S --noconfirm \
   hyprland \
@@ -93,12 +90,6 @@ sudo pacman -S --noconfirm \
   papirus-icon-theme \
   brightnessctl \
   playerctl
-```
-
-### AUR Packages
-
-```bash
-yay -S --noconfirm matugen-bin
 ```
 
 ---
@@ -119,7 +110,6 @@ The installer will:
 2. Install clipboard and utility scripts into `~/.local/bin/`.
 3. Set Nemo as the default file manager via `xdg-mime`.
 4. Configure system-wide dark theme via `gsettings`.
-5. Trigger initial Matugen color generation from wallpaper assets.
 
 ---
 
@@ -131,9 +121,8 @@ arch-lunix/
 │   ├── fontconfig/            # Font configuration and aliases
 │   ├── gtk-3.0/               # GTK3 styling and custom Nemo theme
 │   ├── gtk-4.0/               # GTK4 settings
-│   ├── hypr/                  # Hyprland configuration, scripts, dynamic colors
-│   ├── kitty/                 # Kitty terminal configuration and dynamic palette
-│   ├── matugen/               # Dynamic Material You CSS and config templates
+│   ├── hypr/                  # Hyprland configuration, scripts, color variables
+│   ├── kitty/                 # Kitty terminal configuration and color theme
 │   ├── starship.toml          # Starship cross-shell prompt configuration
 │   └── systemd/               # User systemd service units (clipboard daemon)
 ├── .local/

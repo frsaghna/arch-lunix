@@ -1,5 +1,5 @@
 # Starship Minimalist Prompt Configuration
-# Optimized for Kitty + Hyprland + Matugen Dynamic Colors
+# Optimized for Kitty + Hyprland
 # Zero / Minimal User Context with Clear Success / Error Feedback
 
 add_newline = false

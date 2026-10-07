@@ -3,13 +3,13 @@ set -e
 
 DOTFILES_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
-echo "❄️ Installing Arch Linux + Hyprland + Quickshell dotfiles..."
+echo "Installing Arch Linux + Hyprland dotfiles..."
 
 # Create target directories
-mkdir -p "$HOME/.config" "$HOME/.local/bin" "$HOME/Pictures/Wallpapers" "$HOME/.cache/matugen"
+mkdir -p "$HOME/.config" "$HOME/.local/bin" "$HOME/Pictures/Wallpapers"
 
 # Symlink configurations
-configs=("hypr" "quickshell" "matugen" "kitty" "gtk-3.0" "gtk-4.0" "fontconfig" "systemd")
+configs=("hypr" "quickshell" "kitty" "gtk-3.0" "gtk-4.0" "fontconfig" "systemd")
 for cfg in "${configs[@]}"; do
     if [ -d "$DOTFILES_DIR/.config/$cfg" ]; then
         echo "  -> Linking ~/.config/$cfg"
@@ -41,12 +41,4 @@ gsettings set org.gnome.desktop.interface gtk-theme 'Adwaita-dark' 2>/dev/null |
 gsettings set org.nemo.desktop show-desktop-icons false 2>/dev/null || true
 xdg-mime default nemo.desktop inode/directory 2>/dev/null || true
 
-# Run initial Matugen generation if wallpapers exist
-FIRST_WP=$(find "$HOME/Pictures/Wallpapers" -type f \( -name "*.png" -o -name "*.jpg" \) | head -n 1)
-if [ -n "$FIRST_WP" ] && command -v matugen &>/dev/null; then
-    echo "  -> Generating dynamic Material You color scheme..."
-    matugen image "$FIRST_WP" -m dark --prefer saturation
-    echo "$FIRST_WP" > "$HOME/.cache/current_wallpaper"
-fi
-
-echo "✅ Installation complete! Reload Hyprland with: hyprctl reload"
+echo "Installation complete! Reload Hyprland with: hyprctl reload"

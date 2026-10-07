@@ -1,4 +1,4 @@
--- Matugen Generated Colors for Hyprland
+-- Hyprland Color Palette
 return {
     primary = "rgba(b59790ee)",
     primary_container = "rgba(584e51ee)",

@@ -88,7 +88,7 @@ hl.env("COLOR_SCHEME", "prefer-dark")
 ---- LOOK AND FEEL ----
 -----------------------
 
--- Load dynamic Matugen colors if available
+-- Load color palette if available
 local dynamic_colors = (function()
     local ok, c = pcall(dofile, (os.getenv("HOME") or "/home/kimmi") .. "/.config/hypr/colors.lua")
     if ok and type(c) == "table" then return c end
