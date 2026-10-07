@@ -9,7 +9,7 @@ echo "❄️ Installing Arch Linux + Hyprland + Quickshell dotfiles..."
 mkdir -p "$HOME/.config" "$HOME/.local/bin" "$HOME/Pictures/Wallpapers" "$HOME/.cache/matugen"
 
 # Symlink configurations
-configs=("hypr" "quickshell" "matugen" "kitty" "gtk-3.0" "gtk-4.0" "fontconfig")
+configs=("hypr" "quickshell" "matugen" "kitty" "gtk-3.0" "gtk-4.0" "fontconfig" "systemd")
 for cfg in "${configs[@]}"; do
     if [ -d "$DOTFILES_DIR/.config/$cfg" ]; then
         echo "  -> Linking ~/.config/$cfg"

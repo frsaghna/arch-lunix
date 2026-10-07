@@ -290,10 +290,13 @@ hl.bind(mainMod .. " + R", hl.dsp.exec_cmd("quickshell ipc call drawer toggle ||
 hl.bind(mainMod .. " + P", hl.dsp.window.pseudo())
 hl.bind(mainMod .. " + J", hl.dsp.layout("togglesplit"))    -- dwindle only
 
--- Universal Global Copy / Paste / Cut (Omarchy implementation)
-hl.bind(mainMod .. " + C", hl.dsp.send_shortcut({ mods = "CTRL", key = "Insert" }))
-hl.bind(mainMod .. " + V", hl.dsp.send_shortcut({ mods = "SHIFT", key = "Insert" }))
-hl.bind(mainMod .. " + X", hl.dsp.send_shortcut({ mods = "CTRL", key = "X" }))
+-- Universal Global Copy / Paste / Cut / Select All (Omarchy implementation)
+local homeDir = os.getenv("HOME") or "/home/kimmi"
+hl.bind(mainMod .. " + A", hl.dsp.exec_cmd(homeDir .. "/.config/hypr/scripts/global_select_all.sh"))
+hl.bind(mainMod .. " + C", hl.dsp.exec_cmd(homeDir .. "/.config/hypr/scripts/global_copy.sh"))
+hl.bind(mainMod .. " + V", hl.dsp.exec_cmd(homeDir .. "/.config/hypr/scripts/global_paste.sh"))
+hl.bind(mainMod .. " + X", hl.dsp.exec_cmd(homeDir .. "/.config/hypr/scripts/global_cut.sh"))
+hl.bind(mainMod .. " + CTRL + V", hl.dsp.exec_cmd(homeDir .. "/.local/bin/clipboard-menu.sh"))
 
 
 -- Move focus with mainMod + arrow keys

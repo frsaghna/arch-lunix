@@ -1,0 +1,104 @@
+# Starship Minimalist Prompt Configuration
+# Optimized for Kitty + Hyprland + Matugen Dynamic Colors
+# Zero / Minimal User Context with Clear Success / Error Feedback
+
+add_newline = false
+
+# Minimalist prompt format: Directory -> Git Info -> Command Duration -> Error Status -> Prompt Character
+format = """
+$directory\
+$git_branch\
+$git_status\
+$cmd_duration\
+$status\
+$character"""
+
+right_format = """"""
+
+# ---------------------------------------------------------
+# User Context (Username & Hostname)
+# Disabled for zero user-context clutter
+# ---------------------------------------------------------
+[username]
+show_always = false
+disabled = true
+format = "[$user]($style) "
+style_user = "bold #a5a0b6"
+style_root = "bold red"
+
+[hostname]
+ssh_only = true
+disabled = true
+format = "at [$hostname]($style) "
+style = "bold #87a9b0"
+
+# ---------------------------------------------------------
+# Directory
+# Clean directory path truncated to repo root or max 3 dirs
+# ---------------------------------------------------------
+[directory]
+style = "bold cyan"
+truncation_length = 3
+truncate_to_repo = true
+read_only = " 󰌾"
+read_only_style = "bold red"
+format = "[$path]($style)[$read_only]($read_only_style) "
+
+# ---------------------------------------------------------
+# Prompt Character (Success vs Error Distinction)
+# Green on success, vibrant Red on error
+# ---------------------------------------------------------
+[character]
+success_symbol = "[❯](bold green) "
+error_symbol = "[❯](bold red) "
+vimcmd_symbol = "[❮](bold #87a9b0) "
+
+# ---------------------------------------------------------
+# Status Module (Displays error code on failure, hidden on success)
+# ---------------------------------------------------------
+[status]
+disabled = false
+style = "bold red"
+symbol = "✘ "
+format = "[$symbol$status]($style) "
+
+# ---------------------------------------------------------
+# Git Integration (Minimalist symbols)
+# ---------------------------------------------------------
+[git_branch]
+format = "[$symbol$branch]($style) "
+symbol = " "
+style = "bold #a5a0b6"
+
+[git_status]
+format = '([$all_status$ahead_behind]($style) )'
+style = "bold #87a9b0"
+ahead = "⇡${count} "
+behind = "⇣${count} "
+diverged = "⇕ "
+untracked = "? "
+stashed = "󰉖 "
+modified = "! "
+staged = "+ "
+renamed = "» "
+deleted = "✘ "
+
+# ---------------------------------------------------------
+# Execution Duration
+# Shows elapsed time only when command takes > 2 seconds
+# ---------------------------------------------------------
+[cmd_duration]
+min_time = 2_000
+format = "took [$duration](bold yellow) "
+
+# ---------------------------------------------------------
+# Unnecessary modules disabled for minimalist look
+# ---------------------------------------------------------
+[package]
+disabled = true
+
+[memory_usage]
+disabled = true
+
+[time]
+disabled = true

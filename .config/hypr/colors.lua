@@ -1,12 +1,12 @@
 -- Matugen Generated Colors for Hyprland
 return {
-    primary = "rgba(ffb599ee)",
-    primary_container = "rgba(71361dee)",
-    secondary = "rgba(e7beafee)",
-    tertiary = "rgba(d4c78eee)",
-    surface = "rgba(1a110eee)",
-    surface_container = "rgba(271e1aee)",
-    outline = "rgba(a08d86aa)",
-    inactive_border = "rgba(3d322faa)",
-    active_border = { colors = {"rgba(ffb599ee)", "rgba(d4c78eee)"}, angle = 45 },
+    primary = "rgba(b59790ee)",
+    primary_container = "rgba(584e51ee)",
+    secondary = "rgba(a5a0b6ee)",
+    tertiary = "rgba(e2dddcee)",
+    surface = "rgba(000000ee)",
+    surface_container = "rgba(141214ee)",
+    outline = "rgba(584e51aa)",
+    inactive_border = "rgba(584e51aa)",
+    active_border = { colors = {"rgba(8a8588ee)", "rgba(e2dddcee)"}, angle = 45 },
 }

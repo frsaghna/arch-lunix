@@ -1,21 +1,16 @@
 #!/usr/bin/env bash
-
 # Universal Global Copy Helper
-active_class=$(hyprctl activewindow 2>/dev/null | awk -F': ' '/class:/ {print $2}')
+# Part of Omarchy Global Clipboard System
+set -euo pipefail
 
-case "$active_class" in
-    kitty|Alacritty|foot|org.wezfurlong.wezterm|xterm*|gnome-terminal*|konsole)
-        if command -v wtype >/dev/null 2>&1; then
-            wtype -M ctrl -M shift -k c -m shift -m ctrl
-        else
-            hyprctl dispatch sendshortcut "CTRL SHIFT,c,activewindow" >/dev/null 2>&1
-        fi
-        ;;
-    *)
-        if command -v wtype >/dev/null 2>&1; then
-            wtype -M ctrl -k c -m ctrl
-        else
-            hyprctl dispatch sendshortcut "CTRL,c,activewindow" >/dev/null 2>&1
-        fi
-        ;;
-esac
+export PATH="$HOME/.local/bin:$PATH"
+
+is_terminal() {
+    hyprctl activewindow -j 2>/dev/null | jq -e '.class | test("(?i)kitty|alacritty|ghostty|foot|wezterm|xterm|gnome-terminal|konsole")' >/dev/null 2>&1
+}
+
+if is_terminal; then
+    hyprctl dispatch "hl.dsp.send_shortcut({ mods = 'CTRL SHIFT', key = 'c' })" >/dev/null 2>&1 || wtype -M ctrl -M shift -k c -m shift -m ctrl
+else
+    hyprctl dispatch "hl.dsp.send_shortcut({ mods = 'CTRL', key = 'c' })" >/dev/null 2>&1 || wtype -M ctrl -k c -m ctrl
+fi

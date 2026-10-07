@@ -1,17 +1,17 @@
 /* ============================================================================
    Dynamic Material You Theme for GTK3 & Nemo
    ============================================================================ */
-@define-color accent_color #ffb3b0;
-@define-color accent_bg_color #ffb3b0;
-@define-color accent_fg_color #571d1e;
+@define-color accent_color #b59790;
+@define-color accent_bg_color #b59790;
+@define-color accent_fg_color #070607;
 
-@define-color theme_selected_bg_color #ffb3b0;
-@define-color theme_selected_fg_color #571d1e;
+@define-color theme_selected_bg_color #584e51;
+@define-color theme_selected_fg_color #FAFCFB;
 
-@define-color theme_bg_color #1a1111;
-@define-color theme_base_color #1a1111;
-@define-color theme_fg_color #f0dedd;
-@define-color theme_text_color #f0dedd;
+@define-color theme_bg_color #000000;
+@define-color theme_base_color #000000;
+@define-color theme_fg_color #FAFCFB;
+@define-color theme_text_color #FAFCFB;
 
 /* Nemo Window Background */
 .nemo-window,
@@ -27,75 +27,170 @@
 .nemo-window .sidebar,
 .nemo-window .sidebar treeview,
 .nemo-places-sidebar {
-    background-color: alpha(#140c0c, 0.55);
+    background-color: alpha(#070607, 0.55);
     color: @theme_fg_color;
     border-right: 1px solid rgba(255, 255, 255, 0.08);
 }
 
-/* Headerbar & Toolbar */
-.nemo-window toolbar,
-.nemo-window .primary-toolbar,
-.nemo-window headerbar,
+/* Menubar */
 .nemo-window menubar {
     background-color: alpha(@theme_bg_color, 0.65);
     background-image: none;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    border: none;
     box-shadow: none;
     color: @theme_fg_color;
+    padding: 3px 6px 1px 6px;
 }
 
-/* Breadcrumb Path Bar Buttons */
-.nemo-window .nemo-pathbar button {
-    background-color: rgba(255, 255, 255, 0.08);
-    background-image: none;
-    color: @theme_fg_color;
-    border: 1px solid rgba(255, 255, 255, 0.12);
-    border-radius: 6px;
+.nemo-window menubar > menuitem {
     padding: 3px 8px;
-    margin: 2px;
-    box-shadow: none;
-}
-
-.nemo-window .nemo-pathbar button:hover {
-    background-color: rgba(255, 255, 255, 0.16);
-    border-color: @theme_selected_bg_color;
-}
-
-.nemo-window .nemo-pathbar button:checked,
-.nemo-window .nemo-pathbar button:active {
-    background-color: @theme_selected_bg_color;
-    color: @theme_selected_fg_color;
-    border-color: @theme_selected_bg_color;
-}
-
-/* Navigation & Action Buttons */
-.nemo-window toolbar button,
-.nemo-window .primary-toolbar button {
-    background-color: rgba(255, 255, 255, 0.08);
-    background-image: none;
-    color: @theme_fg_color;
-    border: 1px solid rgba(255, 255, 255, 0.12);
     border-radius: 6px;
+    color: alpha(@theme_fg_color, 0.75);
+}
+
+.nemo-window menubar > menuitem:hover {
+    background-color: rgba(255, 255, 255, 0.07);
+    color: @theme_fg_color;
+}
+
+/* Headerbar & Toolbar under the Menubar */
+.nemo-window toolbar,
+.nemo-window .primary-toolbar,
+.nemo-window headerbar {
+    background-color: alpha(@theme_bg_color, 0.65);
+    background-image: none;
+    border-top: none;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    box-shadow: none;
+    padding: 3px 6px;
+    color: @theme_fg_color;
+}
+
+/* Minimalist Navigation & Action Buttons */
+.nemo-window toolbar button,
+.nemo-window .primary-toolbar button,
+.nemo-window toolbar toolbutton > button {
+    background-color: transparent;
+    background-image: none;
+    color: alpha(@theme_fg_color, 0.85);
+    border: 1px solid transparent;
+    border-radius: 6px;
+    padding: 4px 7px;
+    margin: 1px 2px;
     box-shadow: none;
 }
 
 .nemo-window toolbar button:hover,
-.nemo-window .primary-toolbar button:hover {
-    background-color: rgba(255, 255, 255, 0.16);
-    border-color: @theme_selected_bg_color;
+.nemo-window .primary-toolbar button:hover,
+.nemo-window toolbar toolbutton > button:hover {
+    background-color: rgba(255, 255, 255, 0.08);
+    border-color: transparent;
+    color: @theme_fg_color;
+    box-shadow: none;
+}
+
+.nemo-window toolbar button:active,
+.nemo-window .primary-toolbar button:active,
+.nemo-window toolbar button:checked,
+.nemo-window .primary-toolbar button:checked,
+.nemo-window toolbar toolbutton > button:checked {
+    background-color: rgba(255, 255, 255, 0.12);
+    border-color: transparent;
+    color: @accent_color;
+    box-shadow: none;
+}
+
+.nemo-window toolbar button:disabled,
+.nemo-window .primary-toolbar button:disabled {
+    background-color: transparent;
+    border-color: transparent;
+    color: alpha(@theme_fg_color, 0.25);
+    opacity: 0.4;
+    box-shadow: none;
+}
+
+/* Minimalist Breadcrumb Path Bar */
+.nemo-window .nemo-pathbar {
+    background-color: transparent;
+}
+
+.nemo-window .nemo-pathbar button {
+    background-color: transparent;
+    background-image: none;
+    color: alpha(@theme_fg_color, 0.85);
+    border: 1px solid transparent;
+    border-radius: 6px;
+    padding: 3px 7px;
+    margin: 1px 1px;
+    box-shadow: none;
+}
+
+.nemo-window .nemo-pathbar button:hover {
+    background-color: rgba(255, 255, 255, 0.08);
+    border-color: transparent;
+    color: @theme_fg_color;
+    box-shadow: none;
+}
+
+.nemo-window .nemo-pathbar button:checked,
+.nemo-window .nemo-pathbar button:active {
+    background-color: rgba(255, 255, 255, 0.1);
+    color: @theme_fg_color;
+    border-color: transparent;
+    box-shadow: none;
+}
+
+.nemo-window .nemo-pathbar button.slider-button {
+    background-color: transparent;
+    border-color: transparent;
+    color: alpha(@theme_fg_color, 0.4);
+}
+
+/* Linked button groups (e.g. view switchers) */
+.nemo-window toolbar .linked > button,
+.nemo-window .primary-toolbar .linked > button {
+    border-radius: 0;
+    margin: 0;
+}
+
+.nemo-window toolbar .linked > button:first-child,
+.nemo-window .primary-toolbar .linked > button:first-child {
+    border-top-left-radius: 6px;
+    border-bottom-left-radius: 6px;
+}
+
+.nemo-window toolbar .linked > button:last-child,
+.nemo-window .primary-toolbar .linked > button:last-child {
+    border-top-right-radius: 6px;
+    border-bottom-right-radius: 6px;
+}
+
+.nemo-window toolbar .linked > button:only-child,
+.nemo-window .primary-toolbar .linked > button:only-child {
+    border-radius: 6px;
+}
+
+/* Toolbar separator */
+.nemo-window toolbar separator,
+.nemo-window .primary-toolbar separator {
+    background-color: rgba(255, 255, 255, 0.06);
+    margin: 4px 4px;
 }
 
 /* Location text input entry */
 .nemo-window entry {
-    background-color: rgba(255, 255, 255, 0.08);
+    background-color: rgba(255, 255, 255, 0.05);
     color: @theme_fg_color;
-    border: 1px solid rgba(255, 255, 255, 0.12);
+    border: 1px solid rgba(255, 255, 255, 0.08);
     border-radius: 6px;
+    padding: 3px 8px;
     box-shadow: none;
 }
 
 .nemo-window entry:focus {
-    border-color: @theme_selected_bg_color;
+    background-color: rgba(255, 255, 255, 0.08);
+    border-color: @accent_color;
+    box-shadow: none;
 }
 
 /* Selected Items in Grid & Tree Views */
@@ -112,7 +207,7 @@
 /* Status Bar */
 .nemo-window statusbar,
 .nemo-window .statusbar {
-    background-color: alpha(#140c0c, 0.65);
+    background-color: alpha(#070607, 0.65);
     border-top: 1px solid rgba(255, 255, 255, 0.08);
-    color: #a08c8b;
+    color: #584e51;
 }
