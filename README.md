@@ -1,67 +1,111 @@
-# ❄️ Arch Linux + Hyprland + Quickshell Minimalist Desktop
+# Arch Linux + Hyprland Dotfiles
 
-A modern, minimalist, keyboard-driven Wayland desktop environment powered by **Hyprland**, **Quickshell**, and **Matugen (Material You 3)** dynamic theming with authentic frosted glass aesthetics.
+A minimalist, keyboard-driven Wayland desktop configuration for Arch Linux and Hyprland, featuring dynamic Material You (Matugen) theming, Kitty terminal, Nemo file manager, Starship shell prompt, and systemd clipboard integration.
 
 ---
 
-## ✨ Features
+## Features
 
-- **🎨 Dynamic Material You Theming (Matugen):**
-  - Instant live palette extraction from any selected wallpaper.
-  - Recolor the Top Bar, App Launcher, Window Borders, Kitty Terminal, and Nemo File Manager simultaneously with zero latency.
-- **❄️ Frosted Glass (Acrylic Glassmorphism):**
+- **Dynamic Material You Theming (Matugen)**
+  - Palette extraction from the active wallpaper.
+  - Consistent theming applied to Hyprland window borders, Kitty terminal, Nemo file manager, and GTK3 applications.
+
+- **Acrylic Blur & Glassmorphism**
   - Multi-pass Kawase blur engine (`passes = 3`, `size = 6`, `vibrancy = 0.2`).
-  - Translucent obsidian surfaces (`65%` alpha) with razor-sharp 1px dynamic accent outlines.
-- **💊 Compact Capsule Top Bar:**
-  - 30px stadium pill bar with center-anchored clock/date, minimalist active pill workspaces, and hardware-aware battery widget.
-- **🚀 Spotlight App Launcher:**
-  - Minimalist, hint-free, keyboard-driven application search (<kbd>Super</kbd> + <kbd>Space</kbd>).
-- **🖼️ Horizontal Carousel Wallpaper Picker & Installer:**
-  - Fullscreen side-scrolling wallpaper picker with live type-to-filter (<kbd>Super</kbd> + <kbd>Alt</kbd> + <kbd>Space</kbd> → *Background*).
-  - Built-in wallpaper installer for curated collections or custom image URLs.
-- **📂 Themed Nemo File Manager & Kitty Terminal:**
-  - Synced frosted glass transparency and dynamic accent highlights.
-  - Dynamic Papirus folder icon recoloring to match the wallpaper hue.
-- **🔤 JetBrainsMono Nerd Font Typography:**
-  - Crisp vector iconography and monospace alignment.
+  - Subtle translucent window rules for Kitty (`0.85/0.75`) and Nemo (`0.85/0.75`).
+
+- **Nemo File Manager Rice**
+  - Configured as the primary system file manager (`xdg-mime` association).
+  - Custom GTK3 theme styling (`gtk-3.0/gtk.css`) tailored for Nemo:
+    - Pathbar breadcrumbs and pill buttons.
+    - Frosted translucent status bar and places sidebar.
+    - Selected item accent highlights matching wallpaper hues.
+  - Hyprland opacity rules and desktop icon suppression.
+
+- **Universal Wayland Clipboard Management**
+  - Background systemd user service (`omarchy-clipboard.service`).
+  - Persistent JSON history buffer supporting text and PNG image snapshots.
+  - Interactive clipboard menu (`clipboard-menu.sh`) integrated with Wofi/Rofi/Fuzzel.
+  - Global cut, copy, paste, and select-all wrappers for terminals and GUI apps.
+
+- **Terminal & Shell**
+  - Kitty terminal configured with cursor trail animations, powerline tab bar, and dynamic color injection.
+  - Starship cross-shell prompt with minimalist segment formatting.
 
 ---
 
-## ⌨️ Keybindings Cheat Sheet
+## Keybindings
 
-| Action | Shortcut |
+### Applications & System
+
+| Action | Keybinding |
 | :--- | :--- |
-| **App Drawer / Launcher** | <kbd>Super</kbd> + <kbd>Space</kbd> / <kbd>Super</kbd> + <kbd>R</kbd> |
-| **Settings & Menu Drawer** | <kbd>Super</kbd> + <kbd>Alt</kbd> + <kbd>Space</kbd> |
-| **Terminal (Kitty)** | <kbd>Super</kbd> + <kbd>Return</kbd> |
-| **File Manager (Nemo)** | <kbd>Super</kbd> + <kbd>Shift</kbd> + <kbd>F</kbd> |
-| **Web Browser (Firefox)** | <kbd>Super</kbd> + <kbd>Shift</kbd> + <kbd>B</kbd> |
-| **Close Window** | <kbd>Super</kbd> + <kbd>W</kbd> / <kbd>Super</kbd> + <kbd>Q</kbd> |
-| **Toggle Floating Window** | <kbd>Super</kbd> + <kbd>V</kbd> |
-| **Focus Navigation** | <kbd>Super</kbd> + <kbd>H</kbd> / <kbd>J</kbd> / <kbd>K</kbd> / <kbd>L</kbd> or Arrow Keys |
-| **Switch Workspaces** | <kbd>Super</kbd> + <kbd>1-9</kbd> |
-| **Move Window to Workspace** | <kbd>Super</kbd> + <kbd>Shift</kbd> + <kbd>1-9</kbd> |
-| **Universal Copy / Paste / Cut** | <kbd>Super</kbd> + <kbd>C</kbd> / <kbd>Super</kbd> + <kbd>V</kbd> / <kbd>Super</kbd> + <kbd>X</kbd> |
+| Terminal (Kitty) | `Super` + `Return` |
+| File Manager (Nemo) | `Super` + `Shift` + `F` |
+| Web Browser | `Super` + `Shift` + `B` |
+| App Launcher | `Super` + `Space` / `Super` + `R` |
+| Menu Drawer | `Super` + `Alt` + `Space` |
+| Close Active Window | `Super` + `W` |
+| Toggle Floating | `Super` + `T` |
+| Toggle Fullscreen | `Super` + `F` |
+| Pseudo Tiling | `Super` + `P` |
+| Toggle Split Orientation | `Super` + `J` |
+
+### Clipboard & Selection
+
+| Action | Keybinding |
+| :--- | :--- |
+| Universal Select All | `Super` + `A` |
+| Universal Copy | `Super` + `C` |
+| Universal Paste | `Super` + `V` |
+| Universal Cut | `Super` + `X` |
+| Clipboard History Picker | `Super` + `Ctrl` + `V` |
+
+### Navigation & Workspaces
+
+| Action | Keybinding |
+| :--- | :--- |
+| Focus Window | `Super` + `Left` / `Right` / `Up` / `Down` |
+| Switch Workspace (1–10) | `Super` + `1` – `0` |
+| Move Window to Workspace | `Super` + `Shift` + `1` – `0` |
+| Toggle Scratchpad | `Super` + `S` |
+| Move Window to Scratchpad | `Super` + `Shift` + `S` |
+| Move Window (Interactive) | `Super` + `Left Mouse Button` |
+| Resize Window (Interactive) | `Super` + `Right Mouse Button` |
 
 ---
 
-## 📦 Required Dependencies
+## Dependencies
 
-Install with `pacman` and `yay`:
+### Core Packages (Arch Official Repositories)
 
 ```bash
-# Core Compositor & Tools
-sudo pacman -S --noconfirm hyprland kitty nemo matugen ttf-jetbrains-mono-nerd papirus-icon-theme
+sudo pacman -S --noconfirm \
+  hyprland \
+  kitty \
+  nemo \
+  starship \
+  wl-clipboard \
+  wtype \
+  jq \
+  wofi \
+  ttf-jetbrains-mono-nerd \
+  papirus-icon-theme \
+  brightnessctl \
+  playerctl
+```
 
-# Quickshell (from AUR)
-yay -S --noconfirm quickshell-git
+### AUR Packages
+
+```bash
+yay -S --noconfirm matugen-bin
 ```
 
 ---
 
-## 🚀 Installation & Setup
+## Installation
 
-Clone the repository and run the setup script:
+Clone the repository and run the automated installation script:
 
 ```bash
 git clone https://github.com/frsaghna/arch-lunix.git ~/.dotfiles
@@ -70,22 +114,31 @@ chmod +x install.sh
 ./install.sh
 ```
 
+The installer will:
+1. Link configuration directories into `~/.config/`.
+2. Install clipboard and utility scripts into `~/.local/bin/`.
+3. Set Nemo as the default file manager via `xdg-mime`.
+4. Configure system-wide dark theme via `gsettings`.
+5. Trigger initial Matugen color generation from wallpaper assets.
+
 ---
 
-## 🏗️ Architecture & Dotfiles Structure
+## Directory Structure
 
 ```
-.
+arch-lunix/
 ├── .config/
-│   ├── hypr/               # Hyprland configuration (hyprland.lua, dynamic colors)
-│   ├── quickshell/         # Quickshell bar, drawer, menu, and theme engine
-│   ├── matugen/            # Material You templates for Quickshell, Kitty, GTK
-│   ├── kitty/              # Kitty terminal configuration & dynamic colors
-│   ├── fontconfig/         # Font aliases (JetBrainsMono Nerd Font default)
-│   ├── gtk-3.0/            # GTK3 / Nemo frosted theme styling
-│   └── gtk-4.0/            # GTK4 prefer-dark settings
-├── .local/bin/             # Helper scripts (papirus-folders)
-├── wallpapers/             # Wallpaper gallery
-├── install.sh              # Dotfiles symlink & deploy script
+│   ├── fontconfig/            # Font configuration and aliases
+│   ├── gtk-3.0/               # GTK3 styling and custom Nemo theme
+│   ├── gtk-4.0/               # GTK4 settings
+│   ├── hypr/                  # Hyprland configuration, scripts, dynamic colors
+│   ├── kitty/                 # Kitty terminal configuration and dynamic palette
+│   ├── matugen/               # Dynamic Material You CSS and config templates
+│   ├── starship.toml          # Starship cross-shell prompt configuration
+│   └── systemd/               # User systemd service units (clipboard daemon)
+├── .local/
+│   └── bin/                   # Utility and clipboard helper scripts
+├── wallpapers/                # Curated wallpaper gallery
+├── install.sh                 # Deployment and setup script
 └── README.md
 ```
