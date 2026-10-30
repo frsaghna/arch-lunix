@@ -25,7 +25,7 @@
 -- See https://wiki.hypr.land/Configuring/Basics/Monitors/
 hl.monitor({
     output   = "",
-    mode     = "1920x1080@60",
+    mode     = "preferred",
     position = "auto",
     scale    = 1,
 })
@@ -38,7 +38,7 @@ hl.monitor({
 -- Set programs that you use
 local terminal    = "kitty"
 local fileManager = "nemo"
-local menu        = "hyprlauncher"
+local menu        = "wofi"
 local browser     = "firefox"
 
 
@@ -49,7 +49,12 @@ local browser     = "firefox"
 -- See https://wiki.hypr.land/Configuring/Basics/Autostart/
 
 hl.on("hyprland.start", function ()
-    hl.exec_cmd("quickshell -d")
+    -- Polkit graphical authentication agent
+    hl.exec_cmd("/usr/lib/polkit-kde-authentication-agent-1 || /usr/lib/hyprpolkitagent || /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1")
+    -- Desktop widget shell (if installed)
+    hl.exec_cmd("command -v quickshell >/dev/null 2>&1 && quickshell -d")
+    -- Guest integration agent (if running in QEMU/KVM)
+    hl.exec_cmd("command -v spice-vdagent >/dev/null 2>&1 && spice-vdagent")
 end)
 
 
@@ -59,10 +64,29 @@ end)
 
 -- See https://wiki.hypr.land/Configuring/Advanced-and-Cool/Environment-variables/
 
+-- Cursor & Theme Defaults
+hl.env("XCURSOR_THEME", "Adwaita")
 hl.env("XCURSOR_SIZE", "24")
+hl.env("HYPRCURSOR_THEME", "Adwaita")
 hl.env("HYPRCURSOR_SIZE", "24")
 hl.env("GTK_THEME", "Adwaita:dark")
 hl.env("COLOR_SCHEME", "prefer-dark")
+
+-- Wayland Protocol Defaults for Toolkits & Electron
+hl.env("GDK_BACKEND", "wayland,x11,*")
+hl.env("QT_QPA_PLATFORM", "wayland;xcb")
+hl.env("QT_QPA_PLATFORMTHEME", "qt5ct")
+hl.env("QT_WAYLAND_DISABLE_WINDOWDECORATION", "1")
+hl.env("QT_AUTO_SCREEN_SCALE_FACTOR", "1")
+hl.env("SDL_VIDEODRIVER", "wayland")
+hl.env("CLUTTER_BACKEND", "wayland")
+hl.env("ELECTRON_OZONE_PLATFORM_HINT", "auto")
+
+-- Default User Applications
+hl.env("EDITOR", "nano --modernbindings")
+hl.env("VISUAL", "nano --modernbindings")
+hl.env("BROWSER", "firefox")
+hl.env("TERMINAL", "kitty")
 
 
 -----------------------
@@ -90,7 +114,8 @@ hl.env("COLOR_SCHEME", "prefer-dark")
 
 -- Load color palette if available
 local dynamic_colors = (function()
-    local ok, c = pcall(dofile, (os.getenv("HOME") or "/home/kimmi") .. "/.config/hypr/colors.lua")
+    local home = os.getenv("HOME") or ""
+    local ok, c = pcall(dofile, home .. "/.config/hypr/colors.lua")
     if ok and type(c) == "table" then return c end
     return {
         active_border = { colors = {"rgba(33ccffee)", "rgba(00ff99ee)"}, angle = 45 },
@@ -284,14 +309,14 @@ hl.bind(mainMod .. " + SHIFT + F", hl.dsp.exec_cmd(fileManager))
 hl.bind(mainMod .. " + M", hl.dsp.exec_cmd("command -v hyprshutdown >/dev/null 2>&1 && hyprshutdown || hyprctl dispatch 'hl.dsp.exit()'"))
 hl.bind(mainMod .. " + T", hl.dsp.window.float({ action = "toggle" }))
 hl.bind(mainMod .. " + F", hl.dsp.window.fullscreen())
-hl.bind(mainMod .. " + space", hl.dsp.exec_cmd("quickshell ipc call drawer toggle || quickshell -d"))
-hl.bind(mainMod .. " + ALT + space", hl.dsp.exec_cmd("quickshell ipc call menu toggle || quickshell -d"))
-hl.bind(mainMod .. " + R", hl.dsp.exec_cmd("quickshell ipc call drawer toggle || quickshell -d"))
+hl.bind(mainMod .. " + space", hl.dsp.exec_cmd("command -v quickshell >/dev/null 2>&1 && (quickshell ipc call drawer toggle || quickshell -d) || wofi --show drun"))
+hl.bind(mainMod .. " + ALT + space", hl.dsp.exec_cmd("command -v quickshell >/dev/null 2>&1 && (quickshell ipc call menu toggle || quickshell -d) || wofi --show run"))
+hl.bind(mainMod .. " + R", hl.dsp.exec_cmd("command -v quickshell >/dev/null 2>&1 && (quickshell ipc call drawer toggle || quickshell -d) || wofi --show drun"))
 hl.bind(mainMod .. " + P", hl.dsp.window.pseudo())
 hl.bind(mainMod .. " + J", hl.dsp.layout("togglesplit"))    -- dwindle only
 
 -- Universal Global Copy / Paste / Cut / Select All (Omarchy implementation)
-local homeDir = os.getenv("HOME") or "/home/kimmi"
+local homeDir = os.getenv("HOME") or ""
 hl.bind(mainMod .. " + A", hl.dsp.exec_cmd(homeDir .. "/.config/hypr/scripts/global_select_all.sh"))
 hl.bind(mainMod .. " + C", hl.dsp.exec_cmd(homeDir .. "/.config/hypr/scripts/global_copy.sh"))
 hl.bind(mainMod .. " + V", hl.dsp.exec_cmd(homeDir .. "/.config/hypr/scripts/global_paste.sh"))

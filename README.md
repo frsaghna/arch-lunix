@@ -74,22 +74,24 @@ A minimalist, keyboard-driven Wayland desktop configuration for Arch Linux and H
 
 ---
 
-## Dependencies
+## Dependencies & Error Handling
+
+The automated installer includes a **Dependency Diagnosis & Error Recognition Engine** that automatically detects missing packages, diagnoses common pacman failure modes (stale keyring, mirror 404s, conflicting files), and isolates problematic packages.
+
+### Required Packages (Official Repositories)
 
 ```bash
-sudo pacman -S --noconfirm \
-  hyprland \
-  kitty \
-  nemo \
-  starship \
-  wl-clipboard \
-  wtype \
-  jq \
+sudo pacman -S --needed --noconfirm \
+  hyprland xdg-desktop-portal-hyprland xdg-desktop-portal-gtk \
+  qt5-wayland qt6-wayland polkit-kde-agent \
+  kitty nemo firefox starship \
+  wl-clipboard wtype jq perl util-linux coreutils \
   wofi \
-  ttf-jetbrains-mono-nerd \
-  papirus-icon-theme \
-  brightnessctl \
-  playerctl
+  pipewire wireplumber pipewire-audio pipewire-pulse \
+  brightnessctl playerctl \
+  ttf-jetbrains-mono-nerd noto-fonts-emoji \
+  papirus-icon-theme adwaita-icon-theme \
+  gsettings-desktop-schemas dconf xdg-utils
 ```
 
 ---
@@ -105,11 +107,24 @@ chmod +x install.sh
 ./install.sh
 ```
 
+### Installer Options
+
+| Flag | Description |
+| :--- | :--- |
+| `./install.sh` | Interactive installer with dependency checking, installation, and deployment |
+| `./install.sh -y` / `--yes` | Non-interactive auto-install of all missing dependencies |
+| `./install.sh --check-only` | Runs diagnostic health & dependency check without altering system |
+| `./install.sh --dry-run` | Simulates configuration deployment and backs up safely |
+
 The installer will:
-1. Link configuration directories into `~/.config/`.
-2. Install clipboard and utility scripts into `~/.local/bin/`.
-3. Set Nemo as the default file manager via `xdg-mime`.
-4. Configure system-wide dark theme via `gsettings`.
+1. Run pre-flight checks (Arch Linux verification, non-root user, lockfile, internet).
+2. Scan and report missing dependencies with intelligent pacman error handling.
+3. Deploy configurations into `~/.config/` (with automatic timestamped backups).
+4. Deploy `starship.toml` and configure `~/.bashrc` integration.
+5. Install clipboard and utility scripts into `~/.local/bin/`.
+6. Enable and start `omarchy-clipboard.service` user daemon.
+7. Update font cache and set dark theme/Nemo defaults via `gsettings` and `xdg-mime`.
+8. Run a post-installation health verification pass.
 
 ---
 
